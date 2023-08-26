@@ -1,0 +1,223 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent" android:layout_height="wrap_content" >
+
+	<ScrollView android:id="@+id/activity_main"
+		android:layout_width="wrap_content" 
+		android:layout_height="match_parent" >
+
+		<RelativeLayout android:id="@+id/content_container" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" >
+
+
+			<RelativeLayout
+				android:id="@+id/page__17_login_screen_01_ek1"
+				android:layout_width="410dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="0dp"
+				android:layout_marginTop="0dp">
+
+				<View
+					android:id="@+id/_bg___17_login_screen_01_ek2"
+					android:layout_width="410dp"
+					android:layout_height="812dp"
+					android:layout_marginStart="0dp"
+					android:layout_marginTop="0dp"
+					android:background="@drawable/_bg___17_login_screen_01_ek2_shape" />
+
+
+				<RelativeLayout
+					android:id="@+id/bg"
+					android:layout_width="410dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="0dp"
+					android:layout_marginTop="-33dp">
+
+					<Switch
+						android:id="@+id/switch1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="140dp"
+						android:layout_marginTop="650dp"
+						android:text="Remember me" />
+
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="100dp"
+					android:layout_marginTop="749dp">
+
+					<TextView
+						android:id="@+id/don_t_have_an_account__join_us"
+						android:layout_width="215dp"
+						android:layout_height="27dp"
+						android:layout_marginLeft="0dp"
+						android:layout_marginTop="0dp"
+						android:textAlignment="center"
+						android:fontFamily="@font/rway"
+						android:onClick="signUpClicked"
+						android:text="Don’t have an account ? Join us"
+						android:textColor="@color/apptheme"
+						android:textSize="14sp" />
+
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="65dp"
+					android:layout_marginTop="536dp">
+
+					<Button
+						android:id="@+id/rectangle_42"
+						android:layout_width="295dp"
+						android:layout_height="54dp"
+						android:layout_marginEnd="60dp"
+						android:layout_marginTop="0dp"
+						android:background="@drawable/butdeneme"
+						android:text="LogIn"
+						android:textColor="@color/white"
+						android:fontFamily="@font/rway"
+						android:onClick="signInClicked" />
+
+
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/tab"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="45dp"
+					android:layout_marginTop="378dp">
+
+
+					<RelativeLayout
+						android:id="@+id/password"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="0dp"
+						android:layout_marginTop="0dp">
+
+						<EditText
+							android:id="@+id/emailText"
+							android:layout_width="300dp"
+							android:layout_height="56dp"
+							android:layout_alignParentStart="true"
+							android:layout_alignParentTop="true"
+							android:layout_alignParentEnd="true"
+							android:layout_alignParentBottom="true"
+							android:background="@drawable/input"
+							android:layout_marginEnd="34dp"
+							android:ems="10"
+							android:padding="10dp"
+							android:hint="  Email"
+							android:textColorHint="#9BA4B5"
+							android:inputType="textPersonName" />
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/password_ek1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="0dp"
+						android:layout_marginTop="80dp">
+
+
+						<RelativeLayout
+							android:id="@+id/group"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="315dp"
+							android:layout_marginTop="18dp"
+							android:animationCache="false">
+
+						</RelativeLayout>
+
+						<EditText
+							android:id="@+id/passwordText"
+							android:layout_width="wrap_content"
+							android:layout_height="56dp"
+							android:layout_alignParentStart="true"
+							android:layout_alignParentEnd="true"
+							android:layout_alignParentBottom="true"
+							android:layout_marginEnd="34dp"
+							android:layout_marginBottom="0dp"
+							android:background="@drawable/input"
+							android:padding="10dp"
+
+							android:ems="10"
+							android:hint="  Password"
+							android:inputType="textPassword"
+							android:textColorHint="#9BA4B5" />
+
+						<ImageView
+							android:id="@+id/imageView2"
+							android:layout_width="22dp"
+							android:layout_height="18dp"
+							android:layout_alignEnd="@+id/passwordText"
+							android:layout_alignParentTop="true"
+							android:layout_marginEnd="8dp"
+							android:layout_marginTop="20dp"
+							app:srcCompat="@drawable/visibleeye" />
+
+					</RelativeLayout>
+
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/text_ek1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="60dp"
+					android:layout_marginTop="220dp">
+
+					<TextView
+						android:id="@+id/welcome_back"
+						android:layout_width="190dp"
+						android:layout_height="45dp"
+						android:layout_marginLeft="65dp"
+						android:layout_marginTop="0dp"
+						android:fontFamily="@font/rway"
+						android:text="Welcome Back"
+						android:textColor="@color/black"
+						android:textSize="24sp" />
+
+					<TextView
+						android:id="@+id/you_can_search_c_ourse__apply_course_and_find_scholarship_for_abroad_studies"
+						android:layout_width="296dp"
+						android:layout_height="56dp"
+						android:layout_gravity="center_horizontal|center"
+						android:layout_marginLeft="-2dp"
+						android:layout_marginTop="36dp"
+						android:fontFamily="@font/rwaylight"
+						android:gravity="center"
+						android:text="Are you ready to get to know Bilkent campus with your friends while having fun?"
+						android:textColor="@color/black"
+						android:textSize="14sp" />
+
+				</RelativeLayout>
+
+				<ImageView
+					android:id="@+id/logo_5"
+					android:layout_width="126dp"
+					android:layout_height="126dp"
+					android:layout_marginStart="150dp"
+					android:layout_marginTop="60dp"
+					android:contentDescription="logo_4"
+					android:src="@drawable/logocircle" />
+
+
+			</RelativeLayout>
+		</RelativeLayout>
+
+	</ScrollView>
+</ScrollView>

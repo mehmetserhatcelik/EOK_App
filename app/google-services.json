@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "56410658309",
+    "project_id": "eokapp-3e9c5",
+    "storage_bucket": "eokapp-3e9c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56410658309:android:cb46ddf3774601dfa7ae6c",
+        "android_client_info": {
+          "package_name": "com.eok.eok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56410658309-neqcnni0e1sti0ooo6nrc2epdm2phfdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuNRfFipCkWUt6HUYj3fYxMfqlqpRxNpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56410658309-neqcnni0e1sti0ooo6nrc2epdm2phfdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
