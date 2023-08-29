@@ -7,10 +7,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintDimensionRatio="H,1.5:1"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintVertical_bias="0.8"
+        map:layout_constraintWidth_percent="0.8"
+        tools:context=".PhotoAddScreen" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        map:layout_constraintDimensionRatio="H,3:1"
+        map:layout_constraintWidth_percent="0.30"
+        android:layout_marginBottom="42dp"
+        android:background="@drawable/butdeneme"
+        android:onClick="addPhoto"
+        android:text="Add Photo"
+        android:textColor="@color/white"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/map"
+        map:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttoneasy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/buteasy"
+        android:onClick="easy"
+        android:text="Easy"
+        android:textColor="@color/white"
+        map:layout_constraintBottom_toBottomOf="@+id/buttonmedium"
+        map:layout_constraintDimensionRatio="H,3:1"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/buttonmedium"
+        map:layout_constraintWidth_percent="0.30" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iconImageView"
-        android:layout_width="213dp"
-        android:layout_height="130dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="43dp"
         android:layout_marginBottom="43dp"
         android:onClick="selectImage"
@@ -19,75 +64,43 @@
         map:civ_border_width="2dp"
         map:layout_constraintBottom_toTopOf="@+id/map"
         map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHeight_percent="0.25"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        map:layout_constraintVertical_bias="0.142" />
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="112dp"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.0"
-        map:layout_constraintStart_toStartOf="parent"
-        tools:context=".PhotoAddScreen" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="165dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginBottom="42dp"
-        android:text="Add Photo"
-        android:background="@drawable/butdeneme"
-        android:onClick="addPhoto"
-        android:textColor="@color/white"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/map"
-        map:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttoneasy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/buteasy"
-        android:text="Easy"
-        android:onClick="easy"
-        map:layout_constraintBottom_toTopOf="@+id/map"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/iconImageView" />
+        map:layout_constraintVertical_bias="0.142"
+        map:layout_constraintWidth_percent="0.5" />
 
     <Button
         android:id="@+id/buttonmedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        map:layout_constraintWidth_percent="0.30"
         android:background="@drawable/butmedium"
-        android:text="Medium"
         android:onClick="medium"
+        map:layout_constraintDimensionRatio="H,3:1"
+
+        android:text="Medium"
         map:layout_constraintBottom_toTopOf="@+id/map"
         map:layout_constraintEnd_toStartOf="@+id/buttonhard"
         map:layout_constraintHorizontal_bias="0.535"
         map:layout_constraintStart_toEndOf="@+id/buttoneasy"
-        map:layout_constraintTop_toBottomOf="@+id/iconImageView"
-        map:layout_constraintVertical_bias="0.496" />
+        map:layout_constraintTop_toBottomOf="@+id/iconImageView" />
 
     <Button
         android:id="@+id/buttonhard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/buthard"
-        android:text="Hard"
-        android:onClick="hard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@color/white"
 
-        map:layout_constraintBottom_toTopOf="@+id/map"
+        map:layout_constraintDimensionRatio="H,3:1"
+        map:layout_constraintWidth_percent="0.30"
+        android:background="@drawable/buthard"
+        android:onClick="hard"
+        android:text="Hard"
+
+        map:layout_constraintBottom_toBottomOf="@+id/buttonmedium"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/iconImageView" />
+        map:layout_constraintTop_toTopOf="@+id/buttonmedium" />
 </androidx.constraintlayout.widget.ConstraintLayout>

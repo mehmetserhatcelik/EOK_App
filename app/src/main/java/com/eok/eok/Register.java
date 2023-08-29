@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -37,6 +40,7 @@ public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -44,9 +48,39 @@ public class Register extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+        if (isTabletDevice()) {
+            System.out.println("büyük");
+            binding.description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.loginButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.donTHaveAnAccountJoinUs.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.joinUsText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.welcometext_size_high_resolution));
+            binding.emailText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.passwordText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.emailText.setPadding((int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh));
+            binding.passwordText.setPadding((int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh));
+            binding.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_high_resolution));
+            binding.name.setPadding((int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh),(int)getResources().getDimension(R.dimen.paddingh));
 
 
-        ImageView image = binding.imageView3;
+        } else  {
+            System.out.println("Küçük");
+            binding.description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.loginButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.donTHaveAnAccountJoinUs.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.joinUsText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.welcometext_size_low_resolution));
+            binding.emailText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.passwordText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.emailText.setPadding((int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding));
+            binding.passwordText.setPadding((int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding));
+            binding.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_low_resolution));
+            binding.name.setPadding((int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding),(int)getResources().getDimension(R.dimen.padding));
+
+
+
+        }
+
+
+        ImageView image = binding.imageView2;
         image.setImageResource(R.drawable.visibleeye);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +104,7 @@ public class Register extends AppCompatActivity {
     {
         String email = binding.emailText.getText().toString();
         String password = binding.passwordText.getText().toString();
-        String name = binding.userName.getText().toString();
+        String name = binding.name.getText().toString();
 
         if(email.equals("") || password.equals("")){
             Toast.makeText(this ,"Password or email cannot be empty !",Toast.LENGTH_LONG).show();
@@ -88,7 +122,7 @@ public class Register extends AppCompatActivity {
 
 
                     Map<String,Object> userInfo = new HashMap<>();
-                    userInfo.put("name",binding.userName.getText().toString());
+                    userInfo.put("name",binding.name.getText().toString());
                     userInfo.put("email",binding.emailText.getText().toString());
                     userInfo.put("hotPursuitRecord",0);
                     userInfo.put("timeRushRecord",0);
@@ -119,6 +153,13 @@ public class Register extends AppCompatActivity {
         Intent intent = new Intent(Register.this , LogInPage.class);
         startActivity(intent);
         finish();
+    }
+    public boolean isTabletDevice() {
+        int screenSize = Configuration.SCREENLAYOUT_SIZE_MASK &
+                getResources().getConfiguration().screenLayout;
+
+        return screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+                screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
 
 }

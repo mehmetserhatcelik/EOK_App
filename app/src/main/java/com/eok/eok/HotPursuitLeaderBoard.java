@@ -14,10 +14,8 @@ import android.widget.Toast;
 import com.eok.eok.Adapters.LeaderBoardAdapter;
 import com.eok.eok.Models.User;
 import com.eok.eok.databinding.ActivityHotPursuitLeaderBoardBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +23,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HotPursuitLeaderBoard extends AppCompatActivity {
 

@@ -1,246 +1,191 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent" android:layout_height="wrap_content" >
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".LogInPage">
 
-	<ScrollView android:id="@+id/Register"
-		android:layout_width="wrap_content" 
-		android:layout_height="match_parent" >
+	<androidx.constraintlayout.widget.ConstraintLayout
 
-		<RelativeLayout android:id="@+id/content_container" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" >
-
-
-			<RelativeLayout
-				android:id="@+id/page__16_sign_up_screen__ek1"
-				android:layout_width="410dp"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="0dp"
-				android:layout_marginTop="0dp">
-
-				<View
-					android:id="@+id/_bg___16_sign_up_screen__ek2"
-					android:layout_width="410dp"
-					android:layout_height="812dp"
-					android:layout_marginStart="0dp"
-					android:layout_marginTop="0dp"
-					android:background="@drawable/_bg___16_sign_up_screen__ek2_shape" />
+		android:id="@+id/content_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintHorizontal_bias="0.5"
+		app:layout_constraintVertical_bias="0.5">
 
 
-				<RelativeLayout
-					android:id="@+id/bg"
-					android:layout_width="430dp"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="0dp"
-					android:layout_marginTop="-33dp"/>
+		<ImageView
+			android:id="@+id/logo"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginTop="48dp"
+			android:src="@drawable/logocircle"
+			app:layout_constraintWidth_percent="0.25"
+			app:layout_constraintHeight_percent="0.125"
+			app:layout_constraintDimensionRatio="H,1:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-				<RelativeLayout
-					android:id="@+id/text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="130dp"
-					android:layout_marginTop="749dp">
+		<TextView
+			android:id="@+id/join_us_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="40dp"
+			android:fontFamily="@font/rway"
+			android:text="Join Us"
+			android:textAlignment="center"
+			android:textColor="@color/black"
+			android:textSize="@dimen/welcometext_size_low_resolution"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/logo" />
 
-					<TextView
-						android:id="@+id/have_an_account__log_in"
-						android:layout_width="wrap_content"
-						android:layout_height="27dp"
-						android:layout_gravity="center_horizontal|center"
-						android:layout_marginLeft="0dp"
-						android:fontFamily="@font/rway"
-						android:gravity="center"
-						android:onClick="goToLogin"
-						android:text="Have an account? Log in"
-						android:textColor="@color/apptheme"
-						android:textSize="14sp" />
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|center"
+			android:layout_marginStart="40dp"
+			android:layout_marginEnd="40dp"
+			android:fontFamily="@font/rwaylight"
+			android:gravity="center"
+			android:text="Are you ready to get to know Bilkent campus with your friends while having fun?"
+			android:textAlignment="center"
+			android:textColor="@color/black"
+			android:textSize="@dimen/text_size_low_resolution"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/join_us_text" />
 
-				</RelativeLayout>
+		<EditText
+			android:id="@+id/emailText"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginTop="20dp"
+			android:background="@drawable/input"
+			android:ems="10"
+			android:hint="  Email"
+			android:inputType="textPersonName"
+			android:padding="10dp"
+			android:textColorHint="#9BA4B5"
 
+			app:layout_constraintDimensionRatio="H,5.2:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/name"
+			app:layout_constraintWidth_percent="0.70" />
 
-				<RelativeLayout
-					android:id="@+id/den"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="60dp"
-					android:layout_marginTop="678dp">
+		<EditText
+			android:id="@+id/name"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginTop="56dp"
+			android:background="@drawable/input"
+			android:ems="10"
+			android:hint="  Username"
+			android:inputType="textPersonName"
+			android:padding="10dp"
+			android:textColorHint="#9BA4B5"
 
-					<Button
-						android:id="@+id/button"
-						android:layout_width="295dp"
-						android:layout_height="54dp"
-						android:layout_marginStart="0dp"
-						android:layout_marginTop="0dp"
-						android:background="@drawable/butdeneme"
-						android:textColor="@color/white"
-						android:text="Sıgn Up"
-						android:fontFamily="@font/rwaylight"
-						android:onClick="signUpClicked" />
+			app:layout_constraintDimensionRatio="H,5.2:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.504"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/description"
+			app:layout_constraintWidth_percent="0.70" />
 
+		<EditText
+			android:id="@+id/passwordText"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginTop="20dp"
+			android:background="@drawable/input"
+			android:ems="10"
+			android:hint="  Password"
+			android:inputType="textPassword"
+			android:padding="10dp"
+			android:textColorHint="#9BA4B5"
+			app:layout_constraintDimensionRatio="H,5:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/emailText"
+			app:layout_constraintWidth_percent="0.70" />
 
-				</RelativeLayout>
+		<ImageView
+			android:id="@+id/imageView2"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginEnd="8dp"
+			app:layout_constraintVertical_bias="0.5"
+			app:layout_constraintHeight_percent="0.04"
+			app:layout_constraintDimensionRatio="H,1.1:1"
 
+			app:layout_constraintEnd_toEndOf="@id/passwordText"
+			app:layout_constraintTop_toTopOf="@id/passwordText"
+			app:layout_constraintBottom_toBottomOf="@+id/passwordText"
+			app:srcCompat="@drawable/visibleeye" />
 
-				<RelativeLayout
-					android:id="@+id/tab"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="40dp"
-					android:layout_marginTop="396dp">
+		<Button
+			android:id="@+id/loginButton"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
 
-
-					<RelativeLayout
-						android:id="@+id/email"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="0dp"
-						android:layout_marginTop="0dp">
-
-
-						<EditText
-							android:padding="10dp"
-							android:id="@+id/userName"
-							android:layout_width="300dp"
-							android:layout_height="56dp"
-							android:layout_alignParentStart="true"
-							android:layout_alignParentTop="true"
-							android:layout_alignParentEnd="true"
-							android:layout_alignParentBottom="true"
-							android:layout_marginEnd="34dp"
-							android:background="@drawable/input"
-
-							android:ems="10"
-							android:hint="  Name and Surname"
-							android:textColorHint="#9BA4B5"
-							android:inputType="textPersonName" />
-
-					</RelativeLayout>
-
-
-					<RelativeLayout
-						android:id="@+id/password"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="0dp"
-						android:layout_marginTop="72dp">
-
-						<EditText
-							android:padding="10dp"
-
-							android:id="@+id/emailText"
-							android:layout_width="300dp"
-							android:layout_height="56dp"
-							android:layout_alignParentStart="true"
-							android:layout_alignParentTop="true"
-							android:layout_alignParentEnd="true"
-							android:layout_alignParentBottom="true"
-							android:background="@drawable/input"
-							android:layout_marginEnd="34dp"
-							android:ems="10"
-							android:hint="  Email"
-							android:textColorHint="#9BA4B5"
-							android:inputType="textPersonName" />
-
-					</RelativeLayout>
-
-
-					<RelativeLayout
-						android:id="@+id/password_ek1"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="0dp"
-						android:layout_marginTop="144dp">
-
-
-						<RelativeLayout
-							android:id="@+id/group"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginStart="315dp"
-							android:layout_marginTop="18dp"
-							android:animationCache="false">
-
-							<ImageView
-								android:id="@+id/imageView3"
-								android:layout_width="20dp"
-								android:layout_marginRight="30dp"
-								android:layout_height="20dp"
-								android:background="@drawable/visibleeye"/>
-						</RelativeLayout>
-
-						<EditText
-							android:id="@+id/passwordText"
-
-							android:layout_width="wrap_content"
-							android:layout_height="56dp"
-							android:layout_alignParentStart="true"
-							android:layout_alignParentTop="true"
-							android:layout_alignParentEnd="true"
-							android:layout_alignParentBottom="true"
-							android:layout_marginStart="0dp"
-							android:layout_marginTop="-1dp"
-							android:layout_marginEnd="34dp"
-							android:layout_marginBottom="1dp"
-							android:background="@drawable/input"
-
-							android:ems="10"
-							android:hint="  Password"
-							android:inputType="textPassword"
-							android:padding="10dp"
-							android:textColorHint="#9BA4B5" />
-
-					</RelativeLayout>
-
-				</RelativeLayout>
+			android:layout_marginTop="48dp"
+			android:background="@drawable/butdeneme"
+			android:fontFamily="@font/rway"
+			android:onClick="signUpClicked"
+			android:text="SignUp"
+			android:textColor="@color/white"
+			android:textSize="@dimen/text_size_low_resolution"
+			app:layout_constraintDimensionRatio="H,5:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/passwordText"
+			app:layout_constraintWidth_percent="0.65" />
 
 
-				<RelativeLayout
-					android:id="@+id/text_ek1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="50dp"
-					android:layout_marginTop="220dp">
+		<TextView
+			android:id="@+id/don_t_have_an_account__join_us"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/rway"
+			android:onClick="goToLogin"
+			android:layout_marginTop="50dp"
+			android:text="Have an account? Log in"
+			android:textAlignment="center"
+			android:textColor="@color/apptheme"
+			android:textSize="@dimen/text_size_low_resolution"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintBottom_toBottomOf="parent"
+			android:layout_marginBottom="30dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
-					<TextView
-						android:id="@+id/join_us_to_start_earning"
-						android:layout_width="304dp"
-						android:layout_height="45dp"
-						android:layout_gravity="center_horizontal|center"
-						android:layout_marginLeft="1dp"
-						android:layout_marginTop="0dp"
-						android:layout_marginBottom="30dp"
-						android:fontFamily="@font/rway"
-						android:gravity="center"
-						android:text="Join us"
-						android:textColor="#000000"
-						android:textSize="24sp" />
 
-					<TextView
-						android:id="@+id/farmease_organizes__manages_and_advises_your_agriculture_related_business_for_you_"
-						android:layout_width="313dp"
-						android:layout_height="79dp"
-						android:layout_gravity="center_horizontal|center"
-						android:layout_marginLeft="-2dp"
-						android:layout_marginTop="23dp"
-						android:fontFamily="@font/rway"
-						android:gravity="center"
-						android:text="Are you ready to get to know Bilkent campus with your friends while having fun?"
-						android:textColor="#677294"
-						android:textSize="14sp" />
 
-				</RelativeLayout>
 
-				<ImageView
-					android:id="@+id/logo_4"
-					android:layout_width="121dp"
-					android:layout_height="126dp"
-					android:layout_marginStart="150dp"
-					android:layout_marginTop="60dp"
-					android:contentDescription="logo"
-					android:src="@drawable/logocircle" />
 
-			</RelativeLayout>
-		</RelativeLayout>
-
-	</ScrollView>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

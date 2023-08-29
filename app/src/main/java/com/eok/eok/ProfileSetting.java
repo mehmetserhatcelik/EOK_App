@@ -3,6 +3,7 @@ package com.eok.eok;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -78,7 +79,12 @@ public class ProfileSetting extends AppCompatActivity {
     }
 
     public void logOut() {
-        Intent intent = new Intent(this, MainScreen.class);
+        firebaseAuth.signOut();
+        SharedPreferences preferences = getSharedPreferences("switch",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("remember",false);
+        editor.apply();
+        Intent intent = new Intent(this, LogInPage.class);
         startActivity(intent);
         finish();
     }

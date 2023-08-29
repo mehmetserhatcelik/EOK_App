@@ -293,14 +293,6 @@ public class PhotoAddScreen extends FragmentActivity implements OnMapReadyCallba
                         databaseReference.child("imageURL").setValue(downloadUrl);
 
 
-                        //HashMap<String,Object> iconData = new HashMap<>();
-
-
-                        /*iconData.put("longitude",longitude);
-                        iconData.put("latitude",latitude);
-                        iconData.put("icon",downloadUrl);
-                        iconData.put("difficulty",difficulty);*/
-
                         CollectionReference collectionReference = fstore.collection("Photos");
 
                         collectionReference.add(new Photo(downloadUrl,longitude,latitude,difficulty));
