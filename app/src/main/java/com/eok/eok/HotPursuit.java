@@ -227,9 +227,6 @@ public class HotPursuit extends AppCompatActivity implements OnMapReadyCallback,
 
                     photoList.add(photo);
 
-
-
-
                 }
                 Random random = new Random();
                 int i = random.nextInt(photoList.size());

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -200,12 +201,17 @@ public class MainScreen extends AppCompatActivity implements RecyclerViewInterfa
     }
     public void HotPursuit(View view)
     {
-
         startActivity(HotPursuitIntent);
         finish();
     }
+    public void WordGame(View view)
+    {
+        Intent intent = new Intent(MainScreen.this, WordGame.class);
+        startActivity(intent);
+        finish();
+    }
 
-    public void timeRush(View view)
+    public void TimeRush(View view)
     {
 
         startActivity(TimeRushIntent);

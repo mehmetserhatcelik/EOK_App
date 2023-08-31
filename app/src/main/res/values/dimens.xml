@@ -20,6 +20,14 @@
     <dimen name="card_size_medium_resolution">25sp</dimen>
     <dimen name="card_size_high_resolution">15sp</dimen>
 
+    <dimen name="gamelow">30sp</dimen>
+    <dimen name="gamemed">38sp</dimen>
+    <dimen name="gamehigh">50sp</dimen>
+
+    <dimen name="low">35sp</dimen>
+    <dimen name="med">38sp</dimen>
+    <dimen name="high">60sp</dimen>
+
 
     <dimen name="welcometext_size_low_resolution">24sp</dimen>
     <dimen name="welcometext_size_medium_resolution">44sp</dimen>

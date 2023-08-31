@@ -8,43 +8,57 @@
 
     <FrameLayout
         android:id="@+id/frameLayout2"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/butdeneme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,30:8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/butdeneme">
+        app:layout_constraintWidth_percent="0.6">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hot Pursuit Leaderboard"
-            android:fontFamily="@font/maioran"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textAlignment="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="50dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="Hot Pursuit Leaderboard"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_high_resolution"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
-        android:layout_height="600dp"
-        android:padding="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/frameLayout2" />
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="32dp"
-        android:layout_height="31dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/back"
         android:onClick="back"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintHorizontal_bias="0.571"

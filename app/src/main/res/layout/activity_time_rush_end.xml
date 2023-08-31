@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".TimeRushEnd">
+    tools:context=".HotPursuitEnd">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/pp"
-        android:layout_width="100dp"
-        android:layout_height="110dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1.1"
+        app:layout_constraintWidth_percent="0.3"
         android:background="@drawable/wavy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,99 +28,135 @@
         android:fontFamily="@font/lexenddreg"
         android:text="Name"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="@dimen/gamehigh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.656"
+        app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.092" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <FrameLayout
         android:id="@+id/frameLayout4"
-        android:layout_width="293dp"
-        android:layout_height="352dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/butdeneme"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintDimensionRatio="H,3:3.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/pp"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintWidth_percent="0.7">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/maioran"
-            android:text="Time Rush"
-            android:textColor="@color/white"
-            android:textSize="40sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="Time Rush"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/ta"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="130dp"
-            android:fontFamily="@font/maioran"
-            android:text="Score        :"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+            <TextView
+                android:id="@+id/ta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="Score        :"
+                android:textColor="@color/white"
+                android:textSize="@dimen/high"
+                app:layout_constraintBottom_toTopOf="@id/tas"
+                app:layout_constraintEnd_toStartOf="@id/score"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tas"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
 
-        <TextView
-            android:id="@+id/score"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
-            android:layout_marginTop="133dp"
-            android:fontFamily="@font/maioran"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/high"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="230dp"
-            android:fontFamily="@font/maioran"
-            android:text="Record     :"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+                app:layout_constraintStart_toEndOf="@id/ta"
+                app:layout_constraintTop_toTopOf="@id/ta"
+                app:layout_constraintBottom_toBottomOf="@id/ta"
+                />
 
-        <TextView
-            android:id="@+id/record"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
-            android:layout_marginTop="233dp"
-            android:fontFamily="@font/maioran"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+            <TextView
+                android:id="@+id/tas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="Record     :"
+                android:textColor="@color/white"
+                android:textSize="@dimen/high"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.65"/>
+
+            <TextView
+                android:id="@+id/record"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maioran"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/high"
+                app:layout_constraintBottom_toBottomOf="@+id/tas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintStart_toEndOf="@+id/tas"
+                app:layout_constraintTop_toTopOf="@+id/tas"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </FrameLayout>
 
     <ImageView
-        android:layout_width="69dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/imageView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
         android:background="@drawable/mainmenu"
         android:onClick="main"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintHorizontal_bias="0.301"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
     <ImageView
-        android:layout_width="69dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/imageView8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/againb"
         android:onClick="again"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
+        app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toStartOf="parent" />
 
 

@@ -19,12 +19,18 @@ public class GameBeginDialog extends AppCompatDialogFragment {
     boolean isReady;
     HotPursuit context;
     TimeRush context2;
+    WordGame context3;
     int type;
 
     public GameBeginDialog(HotPursuit singlePlayer)
     {
         this.context=singlePlayer;
         type = 0;
+    }
+    public GameBeginDialog(WordGame wordGame)
+    {
+        this.context3=wordGame;
+        type = 2;
     }
     public GameBeginDialog(TimeRush singlePlayer)
     {
@@ -43,9 +49,11 @@ public class GameBeginDialog extends AppCompatDialogFragment {
 
         if(type == 0)
             view.findViewById(R.id.as).setOnClickListener(this::getReady);
-        else {
-            System.out.println("asd");
+        else if(type == 1) {
             view.findViewById(R.id.as).setOnClickListener(this::getReady2);}
+        else {
+            view.findViewById(R.id.as).setOnClickListener(this::getReady3);
+        }
 
         isReady = false;
         builder.setView(view);
@@ -63,6 +71,13 @@ public class GameBeginDialog extends AppCompatDialogFragment {
         dismiss();
         isReady = true;
         context2.pb();
+
+    }
+    public void getReady3(View view)
+    {
+        dismiss();
+        isReady = true;
+        context3.pb();
 
     }
     public boolean isReady()
