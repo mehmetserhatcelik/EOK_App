@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
@@ -248,6 +249,43 @@ public class WordGame extends AppCompatActivity {
         });
         dialog.show();
     }
+    public void back(View view)
+    {
+        generalCountDownTimer.cancel();
+        Dialog pausedialog = new Dialog(this);
+        pausedialog.setContentView(R.layout.pause_dialog);
+        pausedialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        pausedialog.findViewById(R.id.replay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WordGame.this, WordGame.class);
+                startActivity(intent);
+                pausedialog.dismiss();
+                finish();
+
+            }
+        });
+        pausedialog.findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WordGame.this, MainScreen.class);
+                startActivity(intent);
+                pausedialog.dismiss();
+                finish();
+
+            }
+        });
+        pausedialog.findViewById(R.id.resume).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pausedialog.dismiss();
+                pb();
+            }
+        });
+        pausedialog.show();
+
+    }
     public void pb()
     {
 
@@ -427,6 +465,7 @@ public class WordGame extends AppCompatActivity {
     public void lockTime(View V)
     {
             binding.button5.setEnabled(false);
+            binding.button5.setBackground(getDrawable(R.drawable.butlock));
             binding.editTextTextPersonName.setEnabled(true);
             countdownTextView.setVisibility(View.VISIBLE);
             generalCountDownTimer.cancel();

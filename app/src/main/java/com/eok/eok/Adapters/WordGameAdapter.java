@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,11 +94,14 @@ public class WordGameAdapter extends RecyclerView.Adapter<WordGameAdapter.MyView
 
             if(isResult && isKnowed)
             {
-                holder.itemView.setBackgroundColor(context.getColor(R.color.easy));
+                ((CardView)holder.itemView).setCardBackgroundColor(context.getColor(R.color.easy));
+                holder.textView.setTextColor(context.getColor(R.color.white));
+
             }
         if(isResult && !isKnowed)
         {
-            holder.itemView.setBackgroundColor(context.getColor(R.color.hard));
+            ((CardView)holder.itemView).setCardBackgroundColor(context.getColor(R.color.hard));
+            holder.textView.setTextColor(context.getColor(R.color.white));
         }
 
 

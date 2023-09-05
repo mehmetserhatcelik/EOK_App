@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
-        app:layout_constraintWidth_percent="0.2" />
+        app:layout_constraintWidth_percent="0.18" />
 
 
 
@@ -45,6 +45,7 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pp"
         app:layout_constraintVertical_bias="0.8"
         app:layout_constraintWidth_percent="0.85"
-        tools:context=".HotPursuit" />
+        tools:context=".TimeRush"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -103,6 +104,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <ImageView
+        android:layout_marginStart="5dp"
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -113,15 +115,23 @@
         app:layout_constraintTop_toBottomOf="@+id/pp"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintWidth_percent="0.85"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"  />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="H,5:1"
+        android:background="@drawable/butdeneme"
+        android:textColor="@color/white"
         android:layout_marginBottom="17dp"
         android:text="Lock Your Answer"
         android:onClick="lock"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +142,7 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="H,1:1"
 
-        android:background="@drawable/back"
+        android:background="@drawable/baseline_pause_circle_24"
         android:onClick="back"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
 

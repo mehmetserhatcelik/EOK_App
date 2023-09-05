@@ -128,11 +128,19 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="17dp"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="H,5:1"
+        android:background="@drawable/butdeneme"
+        android:textColor="@color/white"
         android:text="Lock Your Answer"
         android:onClick="lock"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +151,7 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="H,1:1"
 
-        android:background="@drawable/back"
+        android:background="@drawable/baseline_pause_circle_24"
         android:onClick="back"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
 

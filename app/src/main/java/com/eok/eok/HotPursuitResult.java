@@ -74,7 +74,7 @@ public class HotPursuitResult extends AppCompatActivity implements OnMapReadyCal
 
         pointGainedTV.setText(pointsgained+"");
 
-        distanceTV.setText(distance+"");
+        distanceTV.setText(distance+"m");
         if(ppUrl.equals("default"))
             Picasso.get().load(R.drawable.wavy).into(ppTV);
         else

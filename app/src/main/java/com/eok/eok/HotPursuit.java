@@ -65,6 +65,7 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -147,6 +148,7 @@ public class HotPursuit extends AppCompatActivity implements OnMapReadyCallback,
 
         } else {
 
+            binding.button2.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.but_size_low_resolution));
             binding.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamelow));
             binding.textView5.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamelow));
             binding.textView2.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamelow));
@@ -255,9 +257,42 @@ public class HotPursuit extends AppCompatActivity implements OnMapReadyCallback,
     public void back(View view)
     {
         timer.cancel();
-        Intent intent = new Intent(HotPursuit.this,MainScreen.class);
-        startActivity(intent);
-        finish();
+        Dialog pausedialog = new Dialog(this);
+        pausedialog.setContentView(R.layout.pause_dialog);
+        pausedialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        pausedialog.findViewById(R.id.replay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HotPursuit.this, HotPursuit.class);
+                intent.putExtra("name",name);
+                intent.putExtra("pp",ppUrl);
+                intent.putExtra("record",record);
+                startActivity(intent);
+                pausedialog.dismiss();
+                finish();
+
+            }
+        });
+        pausedialog.findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HotPursuit.this, MainScreen.class);
+                startActivity(intent);
+                pausedialog.dismiss();
+                finish();
+
+            }
+        });
+        pausedialog.findViewById(R.id.resume).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pausedialog.dismiss();
+                pb();
+            }
+        });
+        pausedialog.show();
+
     }
 
     public void openDialog()

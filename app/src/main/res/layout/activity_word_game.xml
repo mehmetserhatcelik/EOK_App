@@ -54,8 +54,12 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintDimensionRatio="H,4:1.5"
+        android:background="@drawable/butyello"
+        android:textColor="@color/white"
         android:onClick="getLetter"
         android:text="Get Letter"
         android:textSize="@dimen/but_size_low_resolution"
@@ -70,11 +74,15 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintDimensionRatio="H,4:1.5"
         android:layout_marginTop="30dp"
         android:onClick="lockTime"
         android:text="Lock Time"
+        android:background="@drawable/butyello"
+        android:textColor="@color/white"
         android:textSize="@dimen/but_size_low_resolution"
         app:layout_constraintBottom_toBottomOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,10 +96,10 @@
         android:id="@+id/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="46dp"
         android:fontFamily="@font/rway"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="4:00"
         android:textColor="@color/black"
         android:textSize="@dimen/welcometext_size_high_resolution"
         app:layout_constraintBottom_toTopOf="@+id/smallTimer"
@@ -147,4 +155,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.878" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintWidth_percent="0.08"
+        android:onClick="back"
+        app:layout_constraintBottom_toTopOf="@+id/thisRoundPoint"
+        app:layout_constraintEnd_toStartOf="@+id/counter"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.141"
+        app:srcCompat="@drawable/puse" />
 </androidx.constraintlayout.widget.ConstraintLayout>
