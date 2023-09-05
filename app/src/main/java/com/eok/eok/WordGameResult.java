@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -16,6 +17,7 @@ import com.eok.eok.databinding.ActivityMainScreenBinding;
 import com.eok.eok.databinding.ActivityWordGameResultBinding;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class WordGameResult extends AppCompatActivity {
     private ActivityWordGameResultBinding binding;
@@ -29,6 +31,9 @@ public class WordGameResult extends AppCompatActivity {
     long timer;
     int points;
     int currenQuestionNumber;
+    private long record;
+    private String name;
+    private String pp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,14 @@ public class WordGameResult extends AppCompatActivity {
             binding.totalPoints.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_medium_resolution));
 
         }
+        record = getIntent().getLongExtra("record",0);
+        pp = getIntent().getStringExtra("pp");
+        System.out.println(pp);
+        name = getIntent().getStringExtra("name");
 
         String answer = getIntent().getStringExtra("answer");
          currenQuestionNumber= getIntent().getIntExtra("q",1);
+        currenQuestionNumber= currenQuestionNumber+1;
          timer = getIntent().getLongExtra("time",24000);
         points = getIntent().getIntExtra("points",0);
         word = getIntent().getStringExtra("word");
@@ -82,7 +92,7 @@ public class WordGameResult extends AppCompatActivity {
 
         letter = new ArrayList<>();
         myAdapter = new WordGameAdapter( letter,WordGameResult.this,isTabletDevice(),true);
-        myAdapter.setKnowed(answer.equalsIgnoreCase(word));
+        myAdapter.setKnowed(answer.replace(" ","").equalsIgnoreCase(word));
         recyclerView.setAdapter(myAdapter);
 
 
@@ -115,13 +125,29 @@ public class WordGameResult extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timeLeftInMillis = 0;
-                Intent intent = new Intent(WordGameResult.this,WordGame.class);
-                intent.putExtra("time",timer);
-                intent.putExtra("points",points);
-                intent.putExtra("q",(currenQuestionNumber+1));
+                if(currenQuestionNumber<15) {
+                    Intent intent = new Intent(WordGameResult.this, WordGame.class);
+                    Log.d("Resultistan",pp);
+                    intent.putExtra("time", timer);
+                    intent.putExtra("points", points);
+                    intent.putExtra("q", currenQuestionNumber);
+                    intent.putExtra("record", record);
+                    intent.putExtra("pp", pp);
+                    intent.putExtra("name", name);
+
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Intent intent = new Intent(WordGameResult.this, WordGameEnd.class);
+                    intent.putExtra("total",points);
+                    intent.putExtra("record", record);
+                    intent.putExtra("pp", pp);
+                    intent.putExtra("name", name);
+                    startActivity(intent);
+                    finish();
+                }
                 updateCountdownText();
-                startActivity(intent);
-                finish();
             }
         }.start();
     }

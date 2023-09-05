@@ -25,7 +25,7 @@
         android:text="TextView"
         android:fontFamily="@font/rway"
         app:layout_constraintWidth_percent="0.8"
-
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_high_resolution"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,59 +46,60 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,5.2:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.458"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintWidth_percent="0.70" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="getLetter"
         android:text="Get Letter"
         android:textSize="@dimen/but_size_low_resolution"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="H,2.5:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         app:layout_constraintVertical_bias="0.736"
-        app:layout_constraintWidth_percent="0.3" />
+         />
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:onClick="lockTime"
         android:text="Lock Time"
         android:textSize="@dimen/but_size_low_resolution"
         app:layout_constraintBottom_toBottomOf="@+id/button5"
-        app:layout_constraintDimensionRatio="H,2.5:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.748"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button5"
-        app:layout_constraintVertical_bias="0.706"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintVertical_bias="1.0"
+        />
 
     <TextView
         android:id="@+id/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="46dp"
-        android:text="TextView"
         android:fontFamily="@font/rway"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
         android:textColor="@color/black"
         android:textSize="@dimen/welcometext_size_high_resolution"
         app:layout_constraintBottom_toTopOf="@+id/smallTimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/smallTimer"

@@ -25,12 +25,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 
 import com.eok.eok.MainScreen;
+import com.eok.eok.ProfileSetting;
 import com.eok.eok.R;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -94,6 +96,19 @@ public class IconFragment extends Fragment {
                 changeIcon(view);
             }
         });
+        AppCompatImageView backButton = view.findViewById(R.id.imageView10);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back(view);
+            }
+        });
+    }
+    public void back(View v)
+    {
+        Intent intent = new Intent(getContext(), ProfileSetting.class);
+        startActivity(intent);
+
     }
 
     public void selectImage(View view) {
@@ -173,7 +188,7 @@ public class IconFragment extends Fragment {
     public void changeIcon(View view){
         String imageName = "UserIcons/" + firebaseAuth.getCurrentUser().getUid() + ".png";
 
-        Log.d("ABC", imageData.toString());
+
         storageReference.child(imageName).putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -182,9 +197,7 @@ public class IconFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         String downloadUrl = uri.toString();
-                        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
-                        databaseReference.child("userPhotoUrl").setValue(downloadUrl);
+
                         HashMap<String,Object> iconData = new HashMap<>();
                         iconData.put("userPhotoUrl",downloadUrl);
                         FirebaseUser user = firebaseAuth.getCurrentUser();

@@ -7,13 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
 import com.eok.eok.Adapters.LeaderBoardAdapter;
 import com.eok.eok.Models.User;
 import com.eok.eok.databinding.ActivityHotPursuitLeaderBoardBinding;
+import com.eok.eok.databinding.ActivityTimeRushBinding;
+import com.eok.eok.databinding.ActivityTimeRushLeaderboardBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,13 +37,29 @@ public class TimeRushLeaderboard extends AppCompatActivity {
     private ArrayList<User> list;
     private ProgressDialog progressDialog;
 
-    private ActivityHotPursuitLeaderBoardBinding binding;
+    private ActivityTimeRushLeaderboardBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityHotPursuitLeaderBoardBinding.inflate(getLayoutInflater());
+        binding = ActivityTimeRushLeaderboardBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+
+        if (isTabletDevice()) {
+
+            binding.l.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.hello_size_high_resolution));
+
+
+
+
+
+        } else {
+            binding.l.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.hello_size_low_resolution));
+
+
+
+        }
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -52,7 +72,7 @@ public class TimeRushLeaderboard extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
         myAdapter = new LeaderBoardAdapter ( list,TimeRushLeaderboard.this,"TimeRush" );
-
+        myAdapter.setTablet(isTabletDevice());
         recyclerView.setAdapter(myAdapter);
 
         EventChangeListener();
@@ -67,6 +87,8 @@ public class TimeRushLeaderboard extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot d: queryDocumentSnapshots) {
+                    if((long)d.get("isAdmin")!=1)
+                    {
                     User user = new User(""+d.get("name"),""+d.get("userPhotoUrl"),(long)d.get("timeRushRecord"));
 
                     list.add(user);
@@ -79,7 +101,7 @@ public class TimeRushLeaderboard extends AppCompatActivity {
                                 list.set(j + 1, temp);
                             }
                         }
-                    }
+                    }}
                     myAdapter.notifyDataSetChanged();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
@@ -98,5 +120,12 @@ public class TimeRushLeaderboard extends AppCompatActivity {
         Intent intent = new Intent(TimeRushLeaderboard.this, MainScreen.class);
         startActivity(intent);
         finish();
+    }
+    public boolean isTabletDevice() {
+        int screenSize = Configuration.SCREENLAYOUT_SIZE_MASK &
+                getResources().getConfiguration().screenLayout;
+
+        return screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+                screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
 }

@@ -4,4 +4,7 @@
         <item name="colorPrimary">@color/apptheme</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowElevation">0dp</item>
+    </style>
 </resources>

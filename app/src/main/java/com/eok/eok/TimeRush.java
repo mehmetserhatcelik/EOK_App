@@ -3,11 +3,19 @@ package com.eok.eok;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eok.eok.Models.Photo;
@@ -67,11 +75,12 @@ public class TimeRush extends AppCompatActivity implements OnMapReadyCallback, G
 
     private ProgressBar pb;
     private int counter;
-    private GameBeginDialog calendarDialog;
+
     private String ppUrl;
     private String name;
     private int prevp;
     private long record;
+    private Dialog dialog;
 
 
 
@@ -80,6 +89,45 @@ public class TimeRush extends AppCompatActivity implements OnMapReadyCallback, G
         super.onCreate(savedInstanceState);
         binding = ActivityTimeRushBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        dialog = new Dialog(this);
+
+        if (isTabletDevice()) {
+
+
+            binding.textView5.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamehigh));
+            binding.textView2.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamehigh));
+
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            int screenWidth = displayMetrics.widthPixels;
+            int screenHeight = displayMetrics.heightPixels;
+
+            ViewGroup.LayoutParams layoutParams = binding.imageView.getLayoutParams();
+
+            layoutParams.width = screenWidth*8/10;
+            layoutParams.height = screenHeight*3/10;
+
+            binding.imageView.setLayoutParams(layoutParams);
+
+
+            ViewGroup.LayoutParams layoutParams2 = findViewById(R.id.map2).getLayoutParams();
+
+
+            layoutParams2.width = screenWidth*8/10;
+            layoutParams2.height = screenHeight*3/10;
+
+            findViewById(R.id.map2).setLayoutParams(layoutParams2);
+
+
+
+        } else {
+
+
+            binding.textView5.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamelow));
+            binding.textView2.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.gamelow));
+
+
+
+        }
 
         hideSystemUI();
         ppUrl = getIntent().getStringExtra("pp");
@@ -165,8 +213,18 @@ public class TimeRush extends AppCompatActivity implements OnMapReadyCallback, G
 
     public void openDialog()
     {
-        calendarDialog = new GameBeginDialog(this);
-        calendarDialog.show(getSupportFragmentManager(),"Calendar Dialog");
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView t = dialog.findViewById(R.id.gamedescription);
+        t.setText("Try to get maximum points in a certain time from the questions that ask the location of the photos from the campus.");
+        dialog.findViewById(R.id.as).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                pb();
+            }
+        });
+        dialog.show();
     }
     private void getImage(){
 
@@ -285,5 +343,12 @@ public class TimeRush extends AppCompatActivity implements OnMapReadyCallback, G
 
         mMap.addMarker(new MarkerOptions().position(latLng));
 
+    }
+    public boolean isTabletDevice() {
+        int screenSize = Configuration.SCREENLAYOUT_SIZE_MASK &
+                getResources().getConfiguration().screenLayout;
+
+        return screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+                screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
 }

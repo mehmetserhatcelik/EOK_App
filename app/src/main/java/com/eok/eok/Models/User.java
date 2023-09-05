@@ -9,7 +9,27 @@ public class User {
 
     private String userPhotoUrl;
     private Long distance;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public long getWordGameRecord() {
+        return wordGameRecord;
+    }
+
+    public void setWordGameRecord(long wordGameRecord) {
+        this.wordGameRecord = wordGameRecord;
+    }
+
     private String id;
+    private long wordGameRecord;
+
 
 
     public long getHotPursuitRecord() {
@@ -76,6 +96,10 @@ public class User {
     public void setID(String id)
     {
         this.id = id;
+    }
+    public boolean equals(String uid)
+    {
+        return this.getUid().equals(uid);
     }
 
 

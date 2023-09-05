@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
@@ -28,8 +31,10 @@ import com.eok.eok.databinding.ActivityWordGameBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,7 +43,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +55,7 @@ public class WordGame extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Character> letter;
     private WordGameAdapter myAdapter;
-    private boolean isTimeLocked;
+    private boolean isAnswerLocked;
     private boolean isTimeFinished;
     private int currentQuestionNumber;
     private ArrayList<WordGameSoru> questions4;
@@ -59,11 +66,10 @@ public class WordGame extends AppCompatActivity {
     private ArrayList<WordGameSoru> questions9;
     private ArrayList<WordGameSoru> questions10;
 
-
+    private Dialog dialog;
 
 
     private long counter;
-    private GameBeginDialog calendarDialog;
     private int totalPoints;
     private TextView countdownTextView;
     private CountDownTimer countDownTimer;
@@ -73,6 +79,9 @@ public class WordGame extends AppCompatActivity {
     private boolean[] known;
     private boolean adapted;
     private int takenletter;
+    private long record;
+    private String name;
+    private String pp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,10 @@ public class WordGame extends AppCompatActivity {
         setContentView(view);
 
         takenletter = 0;
+        record = getIntent().getLongExtra("record",0);
+        pp = getIntent().getStringExtra("pp");
+        System.out.println(pp);
+        name = getIntent().getStringExtra("name");
 
         if (isTabletDevice()) {
 
@@ -109,7 +122,7 @@ public class WordGame extends AppCompatActivity {
 
 
         }
-
+        dialog = new Dialog(this);
         currentQuestionNumber = getIntent().getIntExtra("q",1);
         counter = getIntent().getLongExtra("time",240000);
         isTimeFinished = counter == 0;
@@ -141,7 +154,7 @@ public class WordGame extends AppCompatActivity {
             @Override
             public void run()
             {
-                while (isTimeLocked ==false && isTimeFinished==false && timeLeftInMillis!=0)
+                while ( isTimeFinished==false && timeLeftInMillis!=0)
                 {
                     try {
 
@@ -161,23 +174,17 @@ public class WordGame extends AppCompatActivity {
                 }
                 if(isTimeFinished==true || timeLeftInMillis==0) {
 
-                    if(isTimeFinished==true)
-                    {
-
-                        Intent intent = new Intent(WordGame.this,WordGameEnd.class);
-                        intent.putExtra("lost",true);
-                        startActivity(intent);
-                        finish();
-                    }
-                    if(currentQuestionNumber==15)
+                    if(isTimeFinished)
                     {
                         Intent intent = new Intent(WordGame.this,WordGameEnd.class);
-                        intent.putExtra("lost",false);
                         intent.putExtra("total",totalPoints);
+                        intent.putExtra("record",record);
+                        intent.putExtra("pp",pp);
+                        intent.putExtra("name",name);
                         startActivity(intent);
                         finish();
                     }
-                    else{
+                    else if(!isAnswerLocked){
                         Intent intent = new Intent(WordGame.this, WordGameResult.class);
                         intent.putExtra("answer",binding.editTextTextPersonName.getText().toString());
                         intent.putExtra("q",currentQuestionNumber);
@@ -185,6 +192,9 @@ public class WordGame extends AppCompatActivity {
                         intent.putExtra("points",totalPoints);
                         intent.putExtra("word",question.getWord());
                         intent.putExtra("letterno",takenletter);
+                        intent.putExtra("record",record);
+                        intent.putExtra("pp",pp);
+                        intent.putExtra("name",name);
                         startActivity(intent);
                         finish();}
 
@@ -217,6 +227,7 @@ public class WordGame extends AppCompatActivity {
                 letter.add(' ');
             }
             else{
+
                 letter.add(question.getWord().charAt(i));
             }
         }
@@ -224,8 +235,18 @@ public class WordGame extends AppCompatActivity {
     }
     public void openDialog()
     {
-        calendarDialog = new GameBeginDialog(this);
-        calendarDialog.show(getSupportFragmentManager(),"Calendar Dialog");
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView t = dialog.findViewById(R.id.gamedescription);
+        t.setText("Try to get maximum points by knowing the words from their definitions");
+        dialog.findViewById(R.id.as).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                pb();
+            }
+        });
+        dialog.show();
     }
     public void pb()
     {
@@ -248,7 +269,15 @@ public class WordGame extends AppCompatActivity {
     }
     private void updateGeneralCountdownText() {
         int seconds = (int) (counter / 1000);
-        String temp = seconds/60 +":"+seconds%60;
+        String temp = seconds/60 +":";
+        if(seconds%60<10)
+        {
+            temp += "0"+seconds%60;
+        }
+        else{
+            temp+=seconds%60;
+        }
+
         binding.counter.setText(temp);
     }
     public boolean isTabletDevice() {
@@ -315,21 +344,25 @@ public class WordGame extends AppCompatActivity {
                 word = jsonObject.getString("Cevap");
                 length = jsonObject.getString("Harf Sayısı");
 
+                String temp = word.trim().toUpperCase(new Locale("tr"));
+                if(temp.indexOf(' ')!=-1)
+                    definition = definition+". (2 kelime)";
 
+                String tr =temp.replace(" ", "");
                 if (length.equals("4"))
-                    questions4.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions4.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("5"))
-                    questions5.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions5.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("6"))
-                    questions6.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions6.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("7"))
-                    questions7.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions7.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("8"))
-                    questions8.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions8.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("9"))
-                    questions9.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions9.add(new WordGameSoru(definition.trim(), tr));
                 if (length.equals("10"))
-                    questions10.add(new WordGameSoru(definition.trim(), word.trim().toUpperCase()));
+                    questions10.add(new WordGameSoru(definition.trim(), tr));
 
 
             }
@@ -357,7 +390,7 @@ public class WordGame extends AppCompatActivity {
 
             int i = rand.nextInt(questions5.size());
             question = questions5.get(i);
-            System.out.println(question.getWord());
+
         }
         if(currentQuestionNumber ==5 || currentQuestionNumber == 6)
         {
@@ -393,10 +426,32 @@ public class WordGame extends AppCompatActivity {
     }
     public void lockTime(View V)
     {
-        binding.button5.setEnabled(false);
-        binding.editTextTextPersonName.setEnabled(true);
-        countdownTextView.setVisibility(View.VISIBLE);
-        generalCountDownTimer.cancel();
-        startCountdown();
+            binding.button5.setEnabled(false);
+            binding.editTextTextPersonName.setEnabled(true);
+            countdownTextView.setVisibility(View.VISIBLE);
+            generalCountDownTimer.cancel();
+            startCountdown();
+            binding.button6.setText("Lock Answer");
+            binding.button6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    isAnswerLocked = true;
+                    Intent intent = new Intent(WordGame.this, WordGameResult.class);
+                    intent.putExtra("answer",binding.editTextTextPersonName.getText().toString());
+                    intent.putExtra("q",currentQuestionNumber);
+                    intent.putExtra("time",counter);
+                    intent.putExtra("points",totalPoints);
+                    intent.putExtra("word",question.getWord());
+                    intent.putExtra("letterno",takenletter);
+                    intent.putExtra("record",record);
+                    intent.putExtra("pp",pp);
+                    intent.putExtra("name",name);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
     }
+
 }

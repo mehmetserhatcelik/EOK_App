@@ -3,7 +3,9 @@ package com.eok.eok;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +36,27 @@ public class HotPursuitEnd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHotPursuitEndBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (isTabletDevice()) {
+
+            binding.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.high));
+            binding.ta.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.high));
+            binding.tas.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.high));
+            binding.score.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.high));
+            binding.record.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.high));
+
+
+
+
+        } else {
+            binding.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.low));
+            binding.ta.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.low));
+            binding.tas.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.low));
+            binding.score.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.low));
+            binding.record.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.low));
+
+        }
+
 
         photUrl = getIntent().getStringExtra("pp");
         name = getIntent().getStringExtra("name");
@@ -79,5 +102,12 @@ public class HotPursuitEnd extends AppCompatActivity {
         intent.putExtra("record",record);
         startActivity(intent);
         finish();
+    }
+    public boolean isTabletDevice() {
+        int screenSize = Configuration.SCREENLAYOUT_SIZE_MASK &
+                getResources().getConfiguration().screenLayout;
+
+        return screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+                screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
 }

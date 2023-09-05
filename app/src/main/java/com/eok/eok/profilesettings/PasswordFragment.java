@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.eok.eok.MainScreen;
+import com.eok.eok.ProfileSetting;
 import com.eok.eok.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +60,19 @@ public class PasswordFragment extends Fragment {
                 changePassword(view);
             }
         });
+        AppCompatImageView backButton = view.findViewById(R.id.imageView4);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back(view);
+            }
+        });
+    }
+    public void back(View v)
+    {
+        Intent intent = new Intent(getContext(), ProfileSetting.class);
+        startActivity(intent);
+
     }
 
     public void changePassword(View view){

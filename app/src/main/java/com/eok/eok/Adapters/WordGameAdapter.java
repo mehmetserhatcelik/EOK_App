@@ -29,6 +29,7 @@ public class WordGameAdapter extends RecyclerView.Adapter<WordGameAdapter.MyView
 
 
 
+
     public WordGameAdapter(ArrayList<Character> letter, Context context, boolean isTablet , boolean isResult)
         {
             this.letters = letter;
@@ -69,12 +70,11 @@ public class WordGameAdapter extends RecyclerView.Adapter<WordGameAdapter.MyView
 
             holder.textView.setText(letter+"");
             ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-            if(!isTablet &&!adapted)
+            if(!isTablet )
             {
                 holder.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_size_medium_resolution));
-
-                layoutParams.width = layoutParams.width*3/4;
-                layoutParams.height = layoutParams.height*3/4;
+                layoutParams.width = 197;
+                layoutParams.height = 197;
 
                 holder.itemView.setLayoutParams(layoutParams);
             }

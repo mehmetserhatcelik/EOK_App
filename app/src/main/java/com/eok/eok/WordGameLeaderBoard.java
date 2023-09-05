@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.eok.eok.Adapters.LeaderBoardAdapter;
 import com.eok.eok.Models.User;
-import com.eok.eok.databinding.ActivityHotPursuitLeaderBoardBinding;
+import com.eok.eok.databinding.ActivityTimeRushLeaderboardBinding;
+import com.eok.eok.databinding.ActivityWordGameLeaderBoardBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class HotPursuitLeaderBoard extends AppCompatActivity {
+public class WordGameLeaderBoard extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FirebaseFirestore fstore;
@@ -36,15 +37,14 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
     private ArrayList<User> list;
     private ProgressDialog progressDialog;
 
-    private ActivityHotPursuitLeaderBoardBinding binding;
-
-
+    private ActivityWordGameLeaderBoardBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityHotPursuitLeaderBoardBinding.inflate(getLayoutInflater());
+        binding = ActivityWordGameLeaderBoardBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
 
         if (isTabletDevice()) {
 
@@ -61,7 +61,6 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
 
         }
 
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data..."  );
@@ -72,7 +71,7 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         auth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
-        myAdapter = new LeaderBoardAdapter ( list,HotPursuitLeaderBoard.this,"HotPursuit" );
+        myAdapter = new LeaderBoardAdapter ( list,WordGameLeaderBoard.this,"WordGame" );
         myAdapter.setTablet(isTabletDevice());
         recyclerView.setAdapter(myAdapter);
 
@@ -90,11 +89,13 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
                 for (QueryDocumentSnapshot d: queryDocumentSnapshots) {
                     if((long)d.get("isAdmin")!=1)
                     {
-                    User user = new User(""+d.get("name"),(long)d.get("hotPursuitRecord"),""+d.get("userPhotoUrl"));
+                    User user = new User(""+d.get("name"),""+d.get("userPhotoUrl"));
+                    user.setWordGameRecord((long)d.get("wordGameRecord"));
+
                     list.add(user);
                     for (int i = 0; i < list.size(); i++) {
                         for (int j = 0; j < list.size() - i - 1; j++) {
-                            if (list.get(j).getHotPursuitRecord() < list.get(j + 1).getHotPursuitRecord()) {
+                            if (list.get(j).getWordGameRecord() < list.get(j + 1).getWordGameRecord()) {
                                 // Swap scores[j] and scores[j + 1]
                                 User temp = list.get(j);
                                 list.set(j, list.get(j + 1));
@@ -110,14 +111,14 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(HotPursuitLeaderBoard.this, "Failed to sing in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WordGameLeaderBoard.this, "Failed to sing in", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
     public void back(View v)
     {
-        Intent intent = new Intent(HotPursuitLeaderBoard.this, MainScreen.class);
+        Intent intent = new Intent(WordGameLeaderBoard.this, MainScreen.class);
         startActivity(intent);
         finish();
     }
@@ -128,4 +129,5 @@ public class HotPursuitLeaderBoard extends AppCompatActivity {
         return screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
                 screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
+
 }

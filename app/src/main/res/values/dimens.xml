@@ -20,6 +20,11 @@
     <dimen name="card_size_medium_resolution">25sp</dimen>
     <dimen name="card_size_high_resolution">15sp</dimen>
 
+
+    <dimen name="tl">20sp</dimen>
+    <dimen name="tm">25sp</dimen>
+    <dimen name="th">35sp</dimen>
+
     <dimen name="gamelow">30sp</dimen>
     <dimen name="gamemed">38sp</dimen>
     <dimen name="gamehigh">50sp</dimen>
@@ -36,4 +41,8 @@
     <dimen name="padding">10dp</dimen>
     <dimen name="paddingm">20dp</dimen>
     <dimen name="paddingh">30dp</dimen>
+
+    <dimen name="sl">20dp</dimen>
+    <dimen name="sm">20dp</dimen>
+    <dimen name="sh">40dp</dimen>
 </resources>

@@ -16,6 +16,7 @@ public class ProfileSettings extends AppCompatActivity {
     PasswordFragment passwordFragment;
     EmailFragment emailFragment;
     IconFragment iconFragment;
+    NameFragment nameFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,7 @@ public class ProfileSettings extends AppCompatActivity {
         passwordFragment = new PasswordFragment();
         emailFragment = new EmailFragment();
         iconFragment  =new IconFragment();
+        nameFragment  =new NameFragment();
 
         Intent intent = getIntent();
         String setting  = intent.getStringExtra("setting");
@@ -37,6 +39,9 @@ public class ProfileSettings extends AppCompatActivity {
                 break;
             case "email":
                 replaceFragment(emailFragment);
+                break;
+            case "name":
+                replaceFragment(nameFragment);
                 break;
         }
     }

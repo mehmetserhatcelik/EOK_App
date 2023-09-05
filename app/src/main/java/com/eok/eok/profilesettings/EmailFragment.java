@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 
 import com.eok.eok.MainScreen;
+import com.eok.eok.ProfileSetting;
 import com.eok.eok.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,6 +26,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 
 public class EmailFragment extends Fragment {
@@ -56,6 +62,13 @@ public class EmailFragment extends Fragment {
                 changeEmail(view);
             }
         });
+        AppCompatImageView backButton = view.findViewById(R.id.imageView4);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back(view);
+            }
+        });
         password=view.findViewById(R.id.passwordEmailText);
         newEmail=view.findViewById(R.id.newEmailText);
         againEmail=view.findViewById(R.id.againEmailText);
@@ -82,10 +95,28 @@ public class EmailFragment extends Fragment {
         }
         else{
             user.updateEmail(newEmailString);
+            HashMap<String,Object> iconData = new HashMap<>();
+            iconData.put("email",newEmail);
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+            DocumentReference documentReference = firebaseFirestore.collection("Users").document(user.getUid());
+            documentReference.update(iconData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Intent intent = new Intent(getActivity(), MainScreen.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
             Toast.makeText(getContext(), "Successfully changed", Toast.LENGTH_LONG).show();
             Intent intent=new Intent(getContext(), MainScreen.class);
             startActivity(intent);
         }
+
+    }
+    public void back(View v)
+    {
+        Intent intent = new Intent(getContext(), ProfileSetting.class);
+        startActivity(intent);
 
     }
 

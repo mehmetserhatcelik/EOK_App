@@ -32,6 +32,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +43,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,8 +65,8 @@ public class LogInPage extends AppCompatActivity {
 		SharedPreferences preferences = getSharedPreferences("switch",MODE_PRIVATE);
 		boolean sign = preferences.getBoolean("remember",false);
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-		System.out.println(user!= null);
-		System.out.println(sign);
+		FirebaseApp.initializeApp(this);
+
 		if(user != null && sign == true)
 		{
 			checkIsAdmin(auth.getCurrentUser().getUid());
@@ -75,7 +77,7 @@ public class LogInPage extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 
-		System.out.println(isTabletDevice());
+
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		View view = binding.getRoot();

@@ -126,6 +126,8 @@ public class Register extends AppCompatActivity {
                     userInfo.put("email",binding.emailText.getText().toString());
                     userInfo.put("hotPursuitRecord",0);
                     userInfo.put("timeRushRecord",0);
+                    userInfo.put("wordGameRecord",0);
+
                     userInfo.put("isAdmin",0);
                     userInfo.put("userPhotoUrl","default");
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HotPursuitLeaderBoard">
+    tools:context=".TimeRushLeaderboard">
 
     <FrameLayout
         android:id="@+id/frameLayout2"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/maioran"
-                android:text="Hot Pursuit Leaderboard"
+                android:text="Word Game Leaderboard"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_high_resolution"
