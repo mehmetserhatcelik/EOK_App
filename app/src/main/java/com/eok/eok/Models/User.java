@@ -11,6 +11,14 @@ public class User {
     private Long distance;
     private String uid;
 
+    public void setHotPursuitRecord(long hotPursuitRecord) {
+        this.hotPursuitRecord = hotPursuitRecord;
+    }
+
+    public void setTimeRushRecord(long timeRushRecord) {
+        this.timeRushRecord = timeRushRecord;
+    }
+
     public String getUid() {
         return uid;
     }

@@ -173,7 +173,7 @@ public class MainScreen extends AppCompatActivity implements RecyclerViewInterfa
 
         recyclerView = binding.recview;
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         auth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
         myAdapter = new EventAdapter( list,MainScreen.this,isTabletDevice(),this);
@@ -181,6 +181,82 @@ public class MainScreen extends AppCompatActivity implements RecyclerViewInterfa
         recyclerView.setAdapter(myAdapter);
 
         EventChangeListener();
+        FirebaseFirestore store = FirebaseFirestore.getInstance();
+        ranks = new ArrayList<>();
+        CollectionReference database1 = store.collection("Users");
+        database1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot d: queryDocumentSnapshots) {
+                    if((long)d.get("isAdmin")!=1) {
+                        User user = new User("" + d.get("name"), "" + d.get("userPhotoUrl"));
+                        user.setHotPursuitRecord((long) d.get("hotPursuitRecord"));
+                        user.setTimeRushRecord((long) d.get("timeRushRecord"));
+                        user.setWordGameRecord((long) d.get("wordGameRecord"));
+                        user.setUid(d.getId());
+                        ranks.add(user);
+
+                    }
+
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    for (int j = 0; j < ranks.size() - i - 1; j++) {
+                        if (ranks.get(j).getTimeRushRecord() < ranks.get(j + 1).getTimeRushRecord()) {
+                            // Swap scores[j] and scores[j + 1]
+                            User temp = ranks.get(j);
+                            ranks.set(j, ranks.get(j + 1));
+                            ranks.set(j + 1, temp);
+                        }
+                    }
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {                                                System.out.println(i);
+
+
+                        binding.trrank.setText("TimeRush Rank:   #" + (i + 1));
+                    }
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    for (int j = 0; j < ranks.size() - i - 1; j++) {
+                        if (ranks.get(j).getHotPursuitRecord() < ranks.get(j + 1).getHotPursuitRecord()) {
+                            // Swap scores[j] and scores[j + 1]
+                            User temp = ranks.get(j);
+                            ranks.set(j, ranks.get(j + 1));
+                            ranks.set(j + 1, temp);
+                        }
+                    }
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {
+                        System.out.println(i);
+                        binding.hprank.setText("HotPursuit Rank:  #" + (i + 1));
+                    }
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    for (int j = 0; j < ranks.size() - i - 1; j++) {
+                        if (ranks.get(j).getWordGameRecord() < ranks.get(j + 1).getWordGameRecord()) {
+                            // Swap scores[j] and scores[j + 1]
+                            User temp = ranks.get(j);
+                            ranks.set(j, ranks.get(j + 1));
+                            ranks.set(j + 1, temp);
+                        }
+                    }
+                }
+                for (int i = 0; i < ranks.size(); i++) {
+                    if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {
+                        System.out.println(i);
+
+                        binding.wgrank.setText("WordGame Rank: #" + (i + 1));
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainScreen.this, "Failed to sing in", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
         fstore.collection("Users").document(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -212,75 +288,9 @@ public class MainScreen extends AppCompatActivity implements RecyclerViewInterfa
 
                         Picasso.get().load(documentSnapshot.getString("userPhotoUrl")).into(img);
 
-                        FirebaseFirestore store = FirebaseFirestore.getInstance();
-                        ranks = new ArrayList<>();
 
-                        CollectionReference database1 = store.collection("Users");
-                        database1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (QueryDocumentSnapshot d: queryDocumentSnapshots) {
-                                    if((long)d.get("isAdmin")!=1) {
-                                        User user = new User("" + d.get("name"), "" + d.get("userPhotoUrl"));
-                                        user.setWordGameRecord((long) d.get("wordGameRecord"));
-                                        user.setUid(d.getId());
-                                        ranks.add(user);
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            for (int j = 0; j < ranks.size() - i - 1; j++) {
-                                                if (ranks.get(j).getTimeRushRecord() < ranks.get(j + 1).getTimeRushRecord()) {
-                                                    // Swap scores[j] and scores[j + 1]
-                                                    User temp = ranks.get(j);
-                                                    ranks.set(j, ranks.get(j + 1));
-                                                    ranks.set(j + 1, temp);
-                                                }
-                                            }
-                                        }
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {
-                                                binding.trrank.setText("TimeRush Rank:   #" + (i + 1));
-                                            }
-                                        }
 
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            for (int j = 0; j < ranks.size() - i - 1; j++) {
-                                                if (ranks.get(j).getHotPursuitRecord() < ranks.get(j + 1).getHotPursuitRecord()) {
-                                                    // Swap scores[j] and scores[j + 1]
-                                                    User temp = ranks.get(j);
-                                                    ranks.set(j, ranks.get(j + 1));
-                                                    ranks.set(j + 1, temp);
-                                                }
-                                            }
-                                        }
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {
-                                                binding.hprank.setText("HotPursuit Rank:  #" + (i + 1));
-                                            }
-                                        }
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            for (int j = 0; j < ranks.size() - i - 1; j++) {
-                                                if (ranks.get(j).getWordGameRecord() < ranks.get(j + 1).getWordGameRecord()) {
-                                                    // Swap scores[j] and scores[j + 1]
-                                                    User temp = ranks.get(j);
-                                                    ranks.set(j, ranks.get(j + 1));
-                                                    ranks.set(j + 1, temp);
-                                                }
-                                            }
-                                        }
-                                        for (int i = 0; i < ranks.size(); i++) {
-                                            if (ranks.get(i).equals(auth.getCurrentUser().getUid())) {
-                                                binding.wgrank.setText("WordGame Rank: #" + (i + 1));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(MainScreen.this, "Failed to sing in", Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
 
                     }
                 }
